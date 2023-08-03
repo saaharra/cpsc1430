@@ -1,0 +1,48 @@
+#include <iostream>
+#include "StudentList.h"
+using namespace std;
+//this is the drive file, this is to test out the different functions created
+int main()
+{
+	StudentList myList;
+	myList.insert("Sarah", "Nguyen", 60.9);
+	myList.insert("Matthew", "Nguyen", 80.1);
+	myList.insert("John", "Le", 73.9);
+	myList.insert("Olivia", "Nguyen", 91.1);
+    cout << "This is the list after inserting \n";
+	myList.displayList();
+	cout << endl;
+	myList.append("Tony", "Du", 89.2);
+	myList.append("Tricia", "Canares", 78.0);
+	myList.append("Billy", "Smith", 95.6);
+	cout << "This is the list after appending" << endl;
+	myList.displayList();
+	cout << endl;
+	cout << "searching for Olivia Nguyen: " << endl;
+	if (myList.search("Olivia","Nguyen"))
+	{
+		cout << "Olivia Nguyen is in the list" << endl;
+	}
+	else
+	{
+		cout << "Olivia Nguyen is not in the list" << endl;
+	}
+	cout << endl;
+	cout << "searching for Andy Phantom: " << endl;
+	if (myList.search("Andy", "Phantom"))
+	{
+		cout << "Andy Phantom is in the list" << endl;
+	}
+	else
+	{
+		cout << "Andy Phantom is not in the list" << endl;
+	}
+	cout << endl;
+	myList.deleteNode("Tony", "Du");
+    cout << "This is after deleteing Tony Du" << endl;
+	myList.displayList();
+    cout << endl;
+    cout << "This is after appending Amanda Fox to the list" << endl;
+    myList.append("Amanda", "Fox", 86.9);
+    myList.displayList();
+}

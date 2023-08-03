@@ -1,0 +1,17 @@
+//Sarah Nguyen
+//Car.cpp
+//Program: this is all of the member functions for the driver file to use
+#include <iostream>
+#include "Car.h"
+using namespace std;
+Car::Car(int cModel, string cMake)
+{
+  yearModel = cModel;
+  make = cMake;
+  speed = 0;
+}
+
+int Car::getYear()const
+{
+  return yearModel;
+}

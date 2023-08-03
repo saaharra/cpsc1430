@@ -1,0 +1,65 @@
+//Sarah Nguyen
+//TicGame.cpp
+//February 02, 2021
+//This is the driver program that plays the TicTacToe game
+#include <iostream>
+#include <string>
+#include "TicTacToe.h"
+using namespace std;
+int main(int argc, char *argv[])
+{
+  int row, col;
+  bool endgame = false;
+  TicTacToe myGame;
+  char player;
+  int playTurn = 1;
+  while (endgame == false)
+    {
+      myGame.DisplayBoard(); //this prints out the board
+      if (playTurn == 1) // this right here just makes sure the players alternate
+        {
+          player = 'X';                         
+          playTurn = 2;
+        }
+      else if (playTurn == 2)
+        {
+          player = 'O';
+          playTurn = 1;
+        }
+      //get the player to input where they want to put their game piece
+      cout << "Player " << player << endl;
+      cout << "Enter Row: " << endl;
+      cin >> row;
+      cout << "Enter Column: ";
+      cin >> col;
+      cout << endl;
+      //this checks if the user input fits the range and prompts them to enter the correct
+      //format for the numbers
+      if (row <1 || col <1 || row > 3 || col > 3)
+		{
+          if (playTurn == 1 || playTurn == 2)
+            {
+              cout << "please enter the followng numbers for your rows & columns: 1, 2, 3" << endl;
+              playTurn = playTurn;
+            }                                   \
+        }
+      //insert the the number where it needs to be
+      myGame.InsertPiece(row, col,player);
+      //this goes into the check functions to see if it's a win or if its a tie
+      //this one uses the bool aWin to see if there is a win anywhere
+      if(myGame.aWin(player))
+          {
+            myGame.DisplayBoard();
+            cout << "WE HAVE A WINNER! \n" << player << " WINS!" << endl;
+            endgame = true;
+          }
+      //this one uses the bool tie to see if there is a tie
+      else if (myGame.aTie())
+          {
+            myGame.DisplayBoard();
+            cout << "The game is a tie" << endl;
+            endgame = true;
+          }
+    }
+  return 0;
+}

@@ -1,0 +1,45 @@
+//Sarah Nguyen
+//March 08, 2021
+//Queue.h
+//this is ther header file to define all of the member functions in the class
+//Queue.cpp
+#ifndef QUEUE_H
+#define QUEUE_H
+class Queue
+{
+public:
+    //PRE: none
+    //POST: an empty queue
+    Queue();
+    //PRE: takes in the queue and deletes the memory within it
+    //POST: returns an empty queue, setting front and rear to nullptr
+	~Queue();
+    //fuction that inserts at the rear of the queue
+    //PRE: this takes in the empty queue and adds ints to it, along with increasing
+    //the size of the queue too
+    //POST: the size of the queue gets increased, and the queue is filled
+	void enqueue(int);
+    //function removes the value at the front
+    //PRE: this has no parameters but removes the first value in the queue
+    //POST: this returns the first value within the queue
+	int dequeue();
+    //funtction whether the queue is empty
+    //PRE: this looks at the queue and checks the numItems to see if its empty or not
+    //POST: return whether or not it is empty
+    bool isEmpty();
+    //PRE: this has not parameters but takes in the queue and makes a pointer to it to print
+    //out the data
+    //POST: none but the purpose of this is to print out the queue
+    void display();
+  
+private:
+	struct queueNode
+	{
+		int value; //value in a node
+		queueNode* next;
+	};
+	queueNode* front; //the front of queue
+	queueNode* rear; //the rear of queue
+	int numItems; //number of items in the queue
+};
+#endif // !QUEUE_H

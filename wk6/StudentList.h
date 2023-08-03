@@ -1,0 +1,46 @@
+//Sarah Nguyen
+//February 17, 2021
+//This is the header file that constants all the functions that gets called in StudentList.cpp
+#ifndef STUDENTLIST_H
+#define STUDENTLIST_H
+#include <iostream>
+using namespace std;
+class StudentList
+{
+public:
+    StudentList();
+    ~StudentList();
+    //PLEASE GRADE APPEND
+    //Pre: this right here takes in the students first and last name along with
+    //Post: their grades and adds it to the end of the studentList. this doesnt take in account what their
+    //grade percetage is
+    void append(string fname, string lname, double grade);
+    //PLEASE DO NOT GRADE INSERT
+    //Pre: This right here takes in the students first and last names along with their grade
+    //and adds it into the list
+    //Post: inserts the student name in ascending order 
+    void insert(string fname, string lname, double grade);
+    //PLEASE GRADE "DELETENODE"
+    //Pre: this takes the studentlist and looks for the name and then deletes the name from the list
+    //Post: gives back a list with the name deleted from it
+    void deleteNode(string fname, string lname);
+    //PLEASE GRADE "DISPLAYLIST"
+    //Pre: this takes in the studentlist and prints out each component of the list
+    //e.g. prints out the first name first, then the second name, then the grade percentage
+    //Post: this prints out the list of students
+    void displayList()const;
+    //PLEASE GRADE "SEARCH"
+    //Pre: this takes in the first and last name and checks the list to see if the name exists in the StudentList
+    //Post: this returns whether or not the student's name is in the list
+    bool search(string fname, string lname);
+private:
+	struct personObj
+	{
+		string fname;
+		string lname;
+		double grade;
+		personObj* next;
+	};
+	personObj* head;
+};
+#endif

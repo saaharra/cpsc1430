@@ -1,0 +1,56 @@
+//Sarah Nguyen
+//hw2.cpp
+//This is the driver file that calls the functions from IntegerSet.cpp
+//Sarah Nguyen
+//this is the driver file to compile and run the other two files 
+//Purpose: take in integer arrays
+//Outcome: compare two different arrays together and check if theyre the same or different
+//along with putting them together or removing an element from an array
+#include <iostream>
+#include "IntegerSet.h"
+using namespace std;
+int main(int argc, char *argv[])
+{
+	//creation of the integersets 
+    IntegerSet a, b, c, d;
+	//this creates a way for the user to input each element
+    int r;
+
+	//this is the start of the program
+	cout << "Enter set A (-1 to end): " << endl;
+	a.inputSet();
+	cout << "Enter set B (-1 to end): " << endl;
+	b.inputSet();
+	//this checks if a and b are equal to each other or not 
+	if (a.isEqualTo(b) == true)
+	{
+		cout << "Set A and B are the same" << endl;
+	}
+	else
+	{
+		cout << "Set A and B are different" << endl;
+	}
+	c = a.unionOfsets(b);
+	cout << "Union of set A and B are: " << endl;
+	c.printSet();
+	d = a.intersectionOfSets(b);
+	cout << "Intersection of set A and B are: " << endl;
+	d.printSet();
+	//this is where you enter in the element:
+	cout << "Enter elements to insert into set A: ";
+	cin >> r;
+	a.insertElement(r);
+	cout << "Set A " << endl;
+	a.printSet();
+    cout << "Deleting " << r << " from set A..." << endl;
+	a.deleteElement(r);
+	cout << "Set A is now: " << endl;
+	a.printSet();
+    cout << "Now creating a set of specific values and testing the bounds limits." << endl;
+    cout << "Creating arry of size 10: {25, 67, 2, 9, 99, 105, 45, -5, 100, 1}" << endl;
+    c = {25, 67, 2, 9, 99, 105, 45, -5, 100, 1};
+    cout << "Set C is: " << endl;
+    c.printSet();
+
+	return 0;
+}

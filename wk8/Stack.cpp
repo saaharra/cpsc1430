@@ -1,0 +1,179 @@
+//Sarah Nguyen
+//March 02, 2021
+//Stack.cpp
+//Purpose: use it to practice the Implementation of a stack. Illustrate the basics
+//of working with a dynamically allocated array within a class
+//Input: None, well besides the numbers being put into the member functions
+//within the driver file/main
+//Processing: puts it into stack, prints stack, maniuplated stack
+//Output: printing out the data within the stack
+#include <iostream>
+#include "Stack.h"
+using namespace std;
+ 
+Stack::Stack()
+{
+	stackSize = 0;
+	maxSize = 4;
+	valueArry = new double[maxSize];
+	top = -1;
+}
+
+Stack::Stack(const Stack& origin)
+{
+	if (origin.maxSize > 0)
+	{
+		valueArry = new double[origin.maxSize];
+	}
+	else
+	{
+		valueArry = nullptr;
+	}
+	copy(origin);
+}
+
+Stack& Stack::operator=(const Stack& obj)
+{
+    if(this !=&obj)
+    {
+      destroy();
+	  copy(obj);
+    }
+    return *this;
+}
+
+double Stack::peek()
+{
+	if (isEmpty())
+	{
+		return 0;
+	}
+	return valueArry[top];
+}
+
+void Stack::copy(const Stack& orig)
+{
+    stackSize = orig.stackSize;
+    double *temp = new double[maxSize];
+    for (int i = 0; i < stackSize; i++)
+	{
+		temp[i] = orig.valueArry[i];
+	}
+    top = orig.top;
+    destroy();
+    valueArry = temp;
+    
+}
+
+double Stack::pop()
+{
+  double temp = peek();
+	if (isEmpty())
+	{
+		return 0;
+	}
+	else
+	{
+		top--;
+		stackSize = stackSize - 1;
+		return temp;
+	}
+
+}
+
+void Stack::push(double num)
+{
+	if (isFull())
+	{
+		resize();
+		push(num);
+	}
+	else
+	{
+		top++;
+		stackSize++;
+		valueArry[top] = num;
+	}
+}
+
+void Stack::resize()
+{
+    maxSize = getSize() + 10;
+	double *newArry = new double[maxSize];
+    for(int i =0; i < maxSize; i++)
+    {
+        newArry[i] = valueArry[i];
+    }
+    destroy();
+    valueArry = newArry;
+}
+
+void Stack::destroy()
+{
+	if (stackSize > 0)
+	{
+		delete[] valueArry;
+	}
+    valueArry = nullptr;
+}
+
+int Stack::getSize()
+{
+	int size =0; 
+	if (isEmpty())
+	{
+      return 0;
+	}
+	else
+	{
+		for (int i = 0; i < stackSize; i++)
+		{
+			size++;
+		}
+	}
+	return size;
+}
+
+void Stack::display()
+{
+	cout << "Stack is: ";
+	for (int i = top; i >= 0 ; i--)
+	{
+        cout << valueArry[i] << ", "; 
+	}
+	cout << endl;
+}
+
+bool Stack::isEmpty()
+{
+	bool status;
+	if (top == -1)
+	{
+		status = true;
+	}
+	else
+	{
+		status = false;
+	}
+	return status;
+}
+
+bool Stack::isFull()
+{
+	bool status;
+	if (top == maxSize - 1)
+	{
+		status = true;
+	}
+	else
+	{
+		status = false;
+	}
+	return status;
+}
+
+Stack::~Stack()
+{
+  destroy();
+}
+

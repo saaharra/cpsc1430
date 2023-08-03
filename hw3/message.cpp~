@@ -1,0 +1,109 @@
+//Sarah Nguyen
+//February 19, 2021
+//This is the class file that contains all of the functions that was used in the driver file 
+#include <iostream>
+#include <string>
+#include "message.h"
+using namespace std;
+hiddenMessage::hiddenMessage(): head(nullptr)
+{
+ 
+}
+
+//this takes in the character and index of the message and puts it into the
+//linked list in the correct order based on the index number
+void hiddenMessage::append(string l, int i)
+{
+	containedMessage* newNode;
+	containedMessage* nodePtr;
+	newNode = new containedMessage;
+	newNode->next = nullptr;
+	newNode->index = i;
+	newNode->letter = l;
+	if (!head)
+	{
+		head = newNode;
+	}
+	else
+	{
+		nodePtr = head;
+		while (nodePtr->next)
+		{
+			nodePtr = nodePtr->next;
+		}
+		nodePtr->next = newNode;
+
+	}
+}
+
+//this is used to decode the message
+//this takes in the linked list and traverses it, and compare the index of each
+//node to put them in the correct spot to decode it
+void hiddenMessage::decode()
+{
+	containedMessage* nodePtr = head;
+	int temp;
+	string tempname;
+	int counter = 0;
+	while (nodePtr)
+	{
+		nodePtr = nodePtr->next;
+		counter++;
+	}
+	nodePtr = head;
+	for (int i = 0; i < counter; i++)
+	{
+		while (nodePtr->next)
+		{
+			if (nodePtr->index > nodePtr->next->index)
+			{
+				temp = nodePtr->index;
+				nodePtr->index = nodePtr->next->index;
+				nodePtr->next->index = temp;
+				tempname = nodePtr->letter;
+				nodePtr->letter = nodePtr->next->letter;
+				nodePtr->next->letter = tempname;
+				nodePtr = nodePtr->next;
+			}
+			else
+			{
+				nodePtr = nodePtr->next;
+			}
+		}
+		nodePtr = head;
+	}
+}
+
+//this one is to print out the linked list
+//this takes in the linked list and displays the letter thing each 
+//node and prints them out
+void hiddenMessage::display()
+{
+    containedMessage* nodePtr = head;
+    cout << "The Message: " << endl;
+	while (nodePtr)
+	{
+		cout << nodePtr->letter;
+		nodePtr = nodePtr->next;
+	}
+}
+
+//this takes in the linked lists and clears the memory within each node
+//this one is to destroy the linked list, and sets the head to nullptr
+void hiddenMessage::destroy()
+{
+	containedMessage* nodeptr = head;
+	containedMessage* nextNode;
+	while (nodeptr != nullptr)
+	{
+		nextNode = nodeptr->next;
+		delete nodeptr;
+		nodeptr = nextNode;
+	}
+	head = nullptr;
+}
+
+hiddenMessage::~hiddenMessage()
+{
+    destroy();
+}

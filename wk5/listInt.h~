@@ -1,0 +1,29 @@
+#ifndef LISTINT_H
+#define LISTINT_H
+#include <iostream>
+using namespace std;
+
+class ListInt
+{
+private:
+  class NodeInt
+  {
+  public:
+    NodeInt(int dta = 0);
+    int data;
+    NodeInt* next;
+  };
+  NodeInt* head;
+  void destroy();
+  void copy(ListInt const &cList);
+public:
+  ListInt();
+  ListInt(ListInt& cList);
+  ListInt& operator=(ListInt& cList);
+  bool IsEmpty()const;
+  void Add(int x);
+  void print()const;
+  ~ListInt();
+};
+
+#endif
